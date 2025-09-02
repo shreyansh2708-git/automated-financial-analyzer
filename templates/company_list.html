@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nifty 100 Companies</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #eef2f7;
+      margin: 0;
+      padding: 0;
+      color: #22304a;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto 0 auto;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(41, 60, 136, 0.10), 0 1.5px 3.5px rgba(41, 60, 136, 0.03);
+      padding: 36px 30px 46px 30px;
+    }
+    h1 {
+      text-align: center;
+      color: #114488;
+      letter-spacing: 2px;
+      font-weight: 800;
+      margin-bottom: 32px;
+    }
+    .symbol-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 20px 30px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .symbol-item {
+      background: linear-gradient(135deg, #dbeafe 60%, #f3f4f6 100%);
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(73,141,255,0.055);
+      padding: 28px 0;
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #123064;
+      letter-spacing: 1px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+      border: 1.7px solid #c7d3ee;
+    }
+    .symbol-item:hover {
+      background: linear-gradient(135deg, #44c9f3 60%, #88e1ef 100%);
+      color: #fff;
+      border-color: #29b7e3;
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 0 24px #bae6fd99;
+    }
+    @media (max-width: 700px) {
+      .container { padding: 14px 4vw 24px 4vw;}
+      h1 { font-size:1.4em; }
+      .symbol-item { font-size: 1.01em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Nifty 100 Companies</h1>
+    <ul class="symbol-list">
+      {% for company in companies %}
+        <li class="symbol-item">
+          <a href="{{ url_for('company_detail', company_id=company.company_id) }}" style="color:inherit;text-decoration:none;">{{ company.company_id }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>

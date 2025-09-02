@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ML Financial Analysis Results</title>
+    <style>
+        table { border-collapse: collapse; width: 90%; margin: 20px auto; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background: #f9f9f9; }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;">ML Analysis Results by Company</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Company ID</th>
+                <th>Pros</th>
+                <th>Cons</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in results %}
+            <tr>
+                <td>{{ row.company_id }}</td>
+                <td>{{ row.pros }}</td>
+                <td>{{ row.cons }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

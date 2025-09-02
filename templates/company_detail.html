@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ result.company_id }} ML Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f8fc;
+            margin: 0; padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 30px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 24px 32px 32px 32px;
+        }
+        .stock-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+        }
+        .stock-title {
+            font-size: 2.0em;
+            letter-spacing: 0.5px;
+            color: #2d3559;
+            font-weight: 600;
+        }
+        .quant-panel {
+            background: #ddebf7;
+            border-radius: 8px;
+            padding: 18px 24px;
+            margin: 18px 0 28px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px 35px;
+        }
+        .quant-item {
+            min-width: 160px;
+            color: #08476c;
+            font-size: 1.15em;
+            margin-bottom: 8px;
+        }
+        .pros-cons {
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        .box {
+            border-radius: 8px;
+            padding: 20px;
+            min-width: 250px;
+            max-width: 350px;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            line-height: 1.5;
+            margin-top: 2px;
+        }
+        .pro-box {
+            background: #42ba96;
+            color: #fff;
+            border: 1.5px solid #19b37a;
+        }
+        .con-box {
+            background: #ee4949;
+            color: #fff;
+            border: 1.5px solid #c71f1f;
+        }
+        a, a:visited { color: #1e62d0; text-decoration: none;}
+        a:hover {text-decoration: underline;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="stock-header">
+        <div class="stock-title">{{ result.company_id }}</div>
+        <div>
+            <a href="{{ url_for('list_companies') }}">&#8592; Back to company list</a>
+        </div>
+    </div>
+    <div class="quant-panel">
+        <div class="quant-item"><strong>Return on Equity:</strong> {{ result.roe_3y if result.roe_3y is not none else "N/A" }}%</div>
+        <div class="quant-item"><strong>Debt/Equity Ratio:</strong> {{ result.debt_equity if result.debt_equity is not none else "N/A" }}</div>
+        <div class="quant-item"><strong>Dividend Payout:</strong> {{ result.div_payout if result.div_payout is not none else "N/A" }}%</div>
+        <div class="quant-item"><strong>5Y Profit Growth:</strong> {{ result.profit_growth_5y if result.profit_growth_5y is not none else "N/A" }}%</div>
+        <div class="quant-item"><strong>10Y Sales Growth:</strong> {{ result.sales_growth_10y if result.sales_growth_10y is not none else "N/A" }}%</div>
+    </div>
+    <div class="pros-cons">
+        <div class="box pro-box">
+            <strong>Pros:</strong>
+            <ul>
+                {% for pro in result.pros.split('||') if pro.strip() %}
+                <li>{{ pro.strip() }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="box con-box">
+            <strong>Cons:</strong>
+            <ul>
+                {% for con in result.cons.split('||') if con.strip() %}
+                <li>{{ con.strip() }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
